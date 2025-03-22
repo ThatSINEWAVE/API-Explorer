@@ -2,7 +2,7 @@
 
 # [API Explorer](https://thatsinewave.github.io/API-Explorer)
 
-![ChromaLab](https://raw.githubusercontent.com/ThatSINEWAVE/API-Explorer/refs/heads/main/.github/SCREENSHOTS/API-Explorer.png)
+![API-Explorer](https://raw.githubusercontent.com/ThatSINEWAVE/API-Explorer/refs/heads/main/.github/SCREENSHOTS/API-Explorer.png)
 
 A lightweight, browser-based REST API testing tool that allows you to test and debug API endpoints directly in your browser, without installing any software.
 
