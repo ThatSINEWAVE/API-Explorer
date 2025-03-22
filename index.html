@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="all.min.css">
+    <link rel="stylesheet" href="atom-one-dark.min.css">
+    <link rel="icon" href="site-data/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="site-data/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="site-data/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="site-data/favicon-16x16.png">
+    <link rel="manifest" href="site-data/site.webmanifest">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>API Explorer</h1>
+        <p>Test REST APIs directly in your browser</p>
+      </header>
+      <main>
+        <div class="request-section">
+          <div class="url-method-container">
+            <select id="method" class="method-selector">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+              <option value="DELETE">DELETE</option>
+              <option value="HEAD">HEAD</option>
+              <option value="OPTIONS">OPTIONS</option>
+            </select>
+            <input type="url" id="url" placeholder="Enter API endpoint URL" class="url-input" required>
+            <button id="send" class="send-button">Send</button>
+          </div>
+          <div class="tabs">
+            <div class="tab-header">
+              <button class="tab-button active" data-tab="params">Params</button>
+              <button class="tab-button" data-tab="headers">Headers</button>
+              <button class="tab-button" data-tab="body">Body</button>
+              <button class="tab-button" data-tab="auth">Auth</button>
+            </div>
+            <div class="tab-content" id="params-tab">
+              <div class="params-container">
+                <div class="param-row template">
+                  <input type="text" class="param-key" placeholder="Key">
+                  <input type="text" class="param-value" placeholder="Value">
+                  <button class="remove-param">X</button>
+                </div>
+                <button id="add-param" class="add-button">
+                  <i class="fas fa-plus"></i> Add Parameter </button>
+              </div>
+            </div>
+            <div class="tab-content hidden" id="headers-tab">
+              <div class="headers-container">
+                <div class="header-row template">
+                  <input type="text" class="header-key" placeholder="Key">
+                  <input type="text" class="header-value" placeholder="Value">
+                  <button class="remove-header">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+                <button id="add-header" class="add-button">
+                  <i class="fas fa-plus"></i> Add Header </button>
+              </div>
+            </div>
+            <div class="tab-content hidden" id="body-tab">
+              <div class="body-type-selector">
+                <select id="body-type">
+                  <option value="none">None</option>
+                  <option value="json" selected>JSON</option>
+                  <option value="form-data">Form Data</option>
+                  <option value="x-www-form-urlencoded">x-www-form-urlencoded</option>
+                  <option value="raw">Raw</option>
+                </select>
+              </div>
+              <div class="body-editor-container">
+                <textarea id="body-editor" placeholder='{"example": "Enter JSON data here"}'></textarea>
+                <div id="form-data-container" class="hidden">
+                  <div class="form-data-row template">
+                    <input type="text" class="form-key" placeholder="Key">
+                    <input type="text" class="form-value" placeholder="Value">
+                    <button class="remove-form-data">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <button id="add-form-data" class="add-button">
+                    <i class="fas fa-plus"></i> Add Form Data </button>
+                </div>
+              </div>
+            </div>
+            <div class="tab-content hidden" id="auth-tab">
+              <div class="auth-container">
+                <select id="auth-type">
+                  <option value="none">No Auth</option>
+                  <option value="basic">Basic Auth</option>
+                  <option value="bearer">Bearer Token</option>
+                  <option value="api-key">API Key</option>
+                </select>
+                <div id="basic-auth" class="auth-details hidden">
+                  <input type="text" id="basic-username" placeholder="Username">
+                  <input type="password" id="basic-password" placeholder="Password">
+                </div>
+                <div id="bearer-auth" class="auth-details hidden">
+                  <input type="text" id="bearer-token" placeholder="Bearer Token">
+                </div>
+                <div id="api-key-auth" class="auth-details hidden">
+                  <input type="text" id="api-key" placeholder="API Key">
+                  <select id="api-key-location">
+                    <option value="header">Header</option>
+                    <option value="query">Query Parameter</option>
+                  </select>
+                  <input type="text" id="api-key-name" placeholder="Key Name (e.g. X-API-Key)">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="response-section">
+          <div class="response-header">
+            <h2>Response</h2>
+            <div class="response-meta hidden">
+              <span class="status"></span>
+              <span class="time"></span>
+              <span class="size"></span>
+            </div>
+          </div>
+          <div class="response-tabs">
+            <div class="response-tab-header">
+              <button class="response-tab-button active" data-tab="response-body">Body</button>
+              <button class="response-tab-button" data-tab="response-headers">Headers</button>
+            </div>
+            <div class="response-tab-content" id="response-body-tab">
+              <div class="response-actions">
+                <button id="pretty-print" class="action-button" disabled>Pretty</button>
+                <button id="raw-view" class="action-button" disabled>Raw</button>
+                <button id="copy-response" class="action-button" disabled>Copy</button>
+                <button id="download-response" class="action-button" disabled>Download</button>
+              </div>
+              <div class="response-body-container">
+                <pre><code id="response-body" class="json">No response data yet. Send a request to see results.</code></pre>
+              </div>
+            </div>
+            <div class="response-tab-content hidden" id="response-headers-tab">
+              <table id="response-headers-table">
+                <thead>
+                  <tr>
+                    <th>Header</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="2">No response headers yet.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div id="toast" class="toast hidden"></div>
+      <footer>
+        <p>API Explorer - Made by <a href="https://github.com/ThatSINEWAVE" target="_blank">ThatSINEWAVE</a> | <a href="https://github.com/ThatSINEWAVE/API-Explorer" target="_blank">View on GitHub</a>
+        </p>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="highlight.min.js"></script>
+    <script src="json.min.js"></script>
+  </body>
+</html>
