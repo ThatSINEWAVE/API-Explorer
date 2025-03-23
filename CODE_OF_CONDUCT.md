@@ -1,6 +1,6 @@
 <div align="center">
 
-# Code of Conduct - PROJECTNAME
+# Code of Conduct - API-Explorer
 
 </div>
 
