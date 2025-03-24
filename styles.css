@@ -25,7 +25,9 @@
 	padding: 0;
 }
 
+html,
 body {
+	height: 100%;
 	font-family: var(--font-main);
 	background-color: var(--body-bg);
 	color: var(--text-color);
@@ -33,30 +35,39 @@ body {
 }
 
 .container {
-	max-width: 1200px;
+	max-width: 1000px;
+	width: 100%;
 	margin: 0 auto;
-	padding: 1rem;
+	padding: 2rem;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 header {
 	text-align: center;
-	margin-bottom: 2rem;
+	margin-bottom: 2.5rem;
 	padding: 1rem;
 }
 
 header h1 {
 	color: var(--primary-color);
 	margin-bottom: 0.5rem;
+	font-size: 2.5rem;
 }
 
 header p {
 	color: var(--text-muted);
+	font-size: 1.1rem;
 }
 
 main {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
+	flex: 1;
+	width: 100%;
 }
 
 .request-section,
@@ -65,12 +76,14 @@ main {
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	padding: 1.5rem;
+	width: 100%;
 }
 
 .url-method-container {
 	display: flex;
 	gap: 0.5rem;
 	margin-bottom: 1.5rem;
+	align-items: center;
 }
 
 .method-selector {
@@ -102,6 +115,7 @@ main {
 	padding: 0.5rem 1.5rem;
 	cursor: pointer;
 	transition: background-color 0.2s;
+	font-weight: bold;
 }
 
 .send-button:hover {
@@ -125,6 +139,7 @@ main {
 	display: flex;
 	background-color: var(--dark-color);
 	border-bottom: 1px solid var(--border-color);
+	justify-content: center;
 }
 
 .tab-button,
@@ -137,6 +152,9 @@ main {
 	color: var(--text-muted);
 	transition: all 0.2s;
 	border-bottom: 3px solid transparent;
+	flex: 1;
+	text-align: center;
+	max-width: 150px;
 }
 
 .tab-button.active,
@@ -166,6 +184,7 @@ main {
 	display: flex;
 	gap: 0.5rem;
 	margin-bottom: 0.75rem;
+	align-items: center;
 }
 
 .param-key,
@@ -190,8 +209,12 @@ main {
 	border: none;
 	border-radius: var(--border-radius);
 	width: 36px;
+	height: 36px;
 	cursor: pointer;
 	transition: background-color 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .remove-param:hover,
@@ -210,6 +233,10 @@ main {
 	cursor: pointer;
 	transition: all 0.2s;
 	margin-top: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
 }
 
 .add-button:hover {
@@ -243,6 +270,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
+	align-items: center;
 }
 
 #auth-type {
@@ -251,6 +279,8 @@ main {
 	border-radius: var(--border-radius);
 	background-color: var(--dark-color);
 	color: var(--text-color);
+	width: 100%;
+	max-width: 400px;
 }
 
 .auth-details {
@@ -260,6 +290,8 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
+	width: 100%;
+	max-width: 400px;
 }
 
 .auth-details input,
@@ -281,6 +313,7 @@ main {
 .response-meta {
 	display: flex;
 	gap: 1rem;
+	align-items: center;
 }
 
 .status {
@@ -319,6 +352,7 @@ main {
 	display: flex;
 	gap: 0.5rem;
 	margin-bottom: 1rem;
+	justify-content: center;
 }
 
 .action-button {
@@ -326,7 +360,7 @@ main {
 	border: 1px solid var(--border-color);
 	color: var(--text-color);
 	border-radius: var(--border-radius);
-	padding: 0.25rem 0.5rem;
+	padding: 0.25rem 0.75rem;
 	font-size: 0.8rem;
 	cursor: pointer;
 	transition: all 0.2s;
@@ -435,6 +469,10 @@ footer .fa-heart {
 }
 
 @media (max-width: 768px) {
+	.container {
+		padding: 1rem;
+	}
+
 	main {
 		gap: 1rem;
 	}
@@ -451,6 +489,7 @@ footer .fa-heart {
 	.response-tab-button {
 		padding: 0.5rem 0.75rem;
 		font-size: 0.9rem;
+		max-width: none;
 	}
 
 	.tab-content,
@@ -461,5 +500,9 @@ footer .fa-heart {
 	.response-meta {
 		flex-direction: column;
 		gap: 0.5rem;
+	}
+
+	.response-actions {
+		flex-wrap: wrap;
 	}
 }
